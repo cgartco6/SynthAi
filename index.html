@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynthAI - AI-Powered Project Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #9b59b6;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8)), url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        .ai-pricing-form {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .security-badge {
+            background: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .ai-helper {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .ai-helper i {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--accent);
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .progress-bar-custom {
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+            border: none;
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background: #8e44ad;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot me-2"></i>SynthAI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#security">Security</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Login</button>
+                    <button class="btn btn-light">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="display-4 fw-bold mb-4">AI-Powered Project Solutions</h1>
+                    <p class="lead mb-4">Our synthetic intelligence team analyzes your project requirements and provides instant pricing with military-grade security.</p>
+                    <a href="#pricing-form" class="btn btn-light btn-lg">Get Your Project Priced</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="fw-bold mb-3">Our AI Team</h2>
+                    <p class="lead">Meet your dedicated AI helpers that work together to deliver your project</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Project Analyzer</h5>
+                            <p class="card-text">Analyzes project complexity, scope, and requirements to determine the optimal approach.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Tech Recommender</h5>
+                            <p class="card-text">Suggests the best technologies and frameworks based on your project needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Pricing Engine</h5>
+                            <p class="card-text">Calculates fair and accurate pricing based on market rates and project complexity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Pricing Form -->
+    <section id="pricing-form" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="ai-pricing-form">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <h3 class="fw-bold">AI Project Pricing</h3>
+                                <p class="text-muted">Describe your project and our AI will instantly provide a price estimate</p>
+                            </div>
+                            <div class="col-auto">
+                                <span class="security-badge"><i class="fas fa-shield-alt me-1"></i> Military-Grade Security</span>
+                            </div>
+                        </div>
+                        
+                        <form id="projectForm">
+                            <div class="mb-4">
+                                <label for="projectDescription" class="form-label fw-bold">Project Description</label>
+                                <textarea class="form-control" id="projectDescription" rows="5" placeholder="Describe your project in detail..."></textarea>
+                                <div class="form-text">Be as detailed as possible for the most accurate pricing.</div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="projectType" class="form-label fw-bold">Project Type</label>
+                                    <select class="form-select" id="projectType">
+                                        <option value="">Select project type</option>
+                                        <option value="web">Web Application</option>
+                                        <option value="mobile">Mobile App</option>
+                                        <option value="ai">AI/ML Solution</option>
+                                        <option value="ecommerce">E-commerce Platform</option>
+                                        <option value="enterprise">Enterprise Software</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="complexity" class="form-label fw-bold">Estimated Complexity</label>
+                                    <select class="form-select" id="complexity">
+                                        <option value="">Select complexity level</option>
+                                        <option value="simple">Simple (Basic features)</option>
+                                        <option value="medium">Medium (Standard features)</option>
+                                        <option value="complex">Complex (Advanced features)</option>
+                                        <option value="very-complex">Very Complex (Cutting-edge tech)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="timeline" class="form-label fw-bold">Desired Timeline</label>
+                                    <select class="form-select" id="timeline">
+                                        <option value="">Select timeline</option>
+                                        <option value="flexible">Flexible (3+ months)</option>
+                                        <option value="standard">Standard (1-3 months)</option>
+                                        <option value="urgent">Urgent (2-4 weeks)</option>
+                                        <option value="asap">ASAP (1-2 weeks)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="teamSize" class="form-label fw-bold">Preferred Team Size</label>
+                                    <select class="form-select" id="teamSize">
+                                        <option value="">Select team size</option>
+                                        <option value="solo">Solo Developer</option>
+                                        <option value="small">Small Team (2-3)</option>
+                                        <option value="medium">Medium Team (4-6)</option>
+                                        <option value="large">Large Team (7+)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary btn-lg" id="calculatePrice">
+                                    <i class="fas fa-calculator me-2"></i>Calculate Price
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div id="priceResult" class="mt-4 p-4 bg-light rounded d-none">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4 class="fw-bold mb-1">Estimated Project Cost</h4>
+                                    <p class="mb-0" id="projectSummary">Based on your description and selections</p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <h2 class="fw-bold text-primary" id="calculatedPrice">$0</h2>
+                                    <button class="btn btn-accent mt-2">Proceed to Checkout</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5>AI Analysis Breakdown</h5>
+                                <div class="ai-helper">
+                                    <i class="fas fa-brain"></i>
+                                    <div>
+                                        <h6 class="mb-1">Project Analyzer</h6>
+                                        <p class="mb-0 small" id="analyzerResult">Analyzing project requirements...</p>
+                                    </div>
+                                </div>
+                                <div class="ai-helper">
+                                    <i class="fas fa-cogs"></i>
+                                    <div>
+                                        <h6 class="mb-1">Tech Recommender</h6>
+                                        <p class="mb-0 small" id="techResult">Recommending technologies...</p>
+                                    </div>
+                                </div>
+                                <div class="ai-helper">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div>
+                                        <h6 class="mb-1">Pricing Engine</h6>
+                                        <p class="mb-0 small" id="pricingResult">Calculating fair pricing...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="fw-bold mb-3">Military-Grade Security</h2>
+                    <p class="lead">Your data and projects are protected with the highest security standards</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <i class="fas fa-shield-alt fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5>End-to-End Encryption</h5>
+                            <p>All data transmitted between you and our AI systems is encrypted using AES-256 encryption.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <i class="fas fa-user-shield fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5>Zero-Knowledge Architecture</h5>
+                            <p>Our AI systems process your data without storing sensitive information, ensuring complete privacy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <i class="fas fa-fingerprint fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5>Multi-Factor Authentication</h5>
+                            <p>Secure access to your account with multiple authentication methods including biometrics.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <i class="fas fa-server fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5>Secure Infrastructure</h5>
+                            <p>Our servers are housed in Tier IV data centers with 24/7 monitoring and intrusion detection.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-robot me-2"></i>SynthAI</h5>
+                    <p>Revolutionizing project development with synthetic intelligence and military-grade security.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Home</a></li>
+                        <li><a href="#features" class="text-light">Features</a></li>
+                        <li><a href="#pricing" class="text-light">Pricing</a></li>
+                        <li><a href="#security" class="text-light">Security</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> support@synthai.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Follow Us</h5>
+                    <div class="d-flex">
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-github fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 SynthAI. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-light me-3">Privacy Policy</a>
+                    <a href="#" class="text-light">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculatePrice').addEventListener('click', function() {
+            // Get form values
+            const description = document.getElementById('projectDescription').value;
+            const projectType = document.getElementById('projectType').value;
+            const complexity = document.getElementById('complexity').value;
+            const timeline = document.getElementById('timeline').value;
+            const teamSize = document.getElementById('teamSize').value;
+            
+            // Validate form
+            if (!description || !projectType || !complexity || !timeline || !teamSize) {
+                alert('Please fill in all fields to get an accurate price estimate.');
+                return;
+            }
+            
+            // Show loading state
+            const calculateBtn = document.getElementById('calculatePrice');
+            calculateBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...';
+            calculateBtn.disabled = true;
+            
+            // Simulate AI processing with a delay
+            setTimeout(function() {
+                // Calculate base price based on project type and complexity
+                let basePrice = 0;
+                
+                // Base prices by project type
+                const typePrices = {
+                    'web': 5000,
+                    'mobile': 8000,
+                    'ai': 15000,
+                    'ecommerce': 10000,
+                    'enterprise': 20000,
+                    'other': 7000
+                };
+                
+                // Complexity multipliers
+                const complexityMultipliers = {
+                    'simple': 0.7,
+                    'medium': 1.0,
+                    'complex': 1.5,
+                    'very-complex': 2.2
+                };
+                
+                // Timeline multipliers (urgency premium)
+                const timelineMultipliers = {
+                    'flexible': 0.9,
+                    'standard': 1.0,
+                    'urgent': 1.3,
+                    'asap': 1.7
+                };
+                
+                // Team size multipliers
+                const teamSizeMultipliers = {
+                    'solo': 0.8,
+                    'small': 1.0,
+                    'medium': 1.3,
+                    'large': 1.8
+                };
+                
+                basePrice = typePrices[projectType] * complexityMultipliers[complexity] * 
+                           timelineMultipliers[timeline] * teamSizeMultipliers[teamSize];
+                
+                // Add description length factor (longer descriptions might indicate more complex projects)
+                const descLength = description.length;
+                if (descLength > 1000) basePrice *= 1.2;
+                else if (descLength > 500) basePrice *= 1.1;
+                
+                // Round to nearest 100
+                basePrice = Math.round(basePrice / 100) * 100;
+                
+                // Update the UI with the calculated price
+                document.getElementById('calculatedPrice').textContent = '$' + basePrice.toLocaleString();
+                
+                // Generate AI analysis text based on selections
+                const projectTypes = {
+                    'web': 'web application',
+                    'mobile': 'mobile application',
+                    'ai': 'AI/ML solution',
+                    'ecommerce': 'e-commerce platform',
+                    'enterprise': 'enterprise software',
+                    'other': 'custom project'
+                };
+                
+                const complexityText = {
+                    'simple': 'relatively simple',
+                    'medium': 'moderately complex',
+                    'complex': 'highly complex',
+                    'very-complex': 'extremely complex'
+                };
+                
+                document.getElementById('projectSummary').textContent = 
+                    `A ${complexityText[complexity]} ${projectTypes[projectType]} with ${teamSize} team and ${timeline} timeline.`;
+                
+                // Update AI analysis breakdown
+                document.getElementById('analyzerResult').textContent = 
+                    `Identified as a ${complexityText[complexity]} project requiring specialized attention.`;
+                
+                // Tech recommendations based on project type
+                const techRecommendations = {
+                    'web': 'React.js, Node.js, MongoDB',
+                    'mobile': 'React Native, Firebase, Redux',
+                    'ai': 'Python, TensorFlow, PyTorch',
+                    'ecommerce': 'Shopify API, Stripe, React',
+                    'enterprise': 'Java Spring Boot, MySQL, Docker',
+                    'other': 'Custom technology stack based on requirements'
+                };
+                
+                document.getElementById('techResult').textContent = 
+                    `Recommended technologies: ${techRecommendations[projectType]}.`;
+                
+                document.getElementById('pricingResult').textContent = 
+                    `Calculated fair market price based on ${projectTypes[projectType]} complexity and timeline.`;
+                
+                // Show the result section
+                document.getElementById('priceResult').classList.remove('d-none');
+                
+                // Reset button
+                calculateBtn.innerHTML = '<i class="fas fa-calculator me-2"></i>Calculate Price';
+                calculateBtn.disabled = false;
+            }, 2000); // 2 second delay to simulate AI processing
+        });
+    </script>
+</body>
+</html>
