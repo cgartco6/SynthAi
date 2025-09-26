@@ -5,6 +5,8 @@ from flask_cors import CORS
 from flask_mail import Mail
 from celery import Celery
 import os
+import logging
+from cryptography.fernet import Fernet
 
 # Initialize extensions
 db = SQLAlchemy()
@@ -12,30 +14,46 @@ jwt = JWTManager()
 mail = Mail()
 celery = Celery(__name__)
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 def create_app():
     app = Flask(__name__)
     
     # Configuration
     app.config.from_mapping(
-        SECRET_KEY=os.environ.get('SECRET_KEY', 'dev-secret-key'),
+        # Security
+        SECRET_KEY=os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production'),
+        JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY', 'jwt-secret-key-change-in-production'),
+        
+        # Database
         SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL', 'sqlite:///synthai.db'),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY', 'jwt-secret-key'),
+        
+        # JWT
         JWT_ACCESS_TOKEN_EXPIRES=int(os.environ.get('JWT_EXPIRY_HOURS', 24)) * 3600,
+        
+        # Email
         MAIL_SERVER=os.environ.get('MAIL_SERVER', 'smtp.gmail.com'),
         MAIL_PORT=int(os.environ.get('MAIL_PORT', 587)),
         MAIL_USE_TLS=os.environ.get('MAIL_USE_TLS', 'True').lower() == 'true',
         MAIL_USERNAME=os.environ.get('MAIL_USERNAME'),
         MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD'),
+        
+        # Celery
         CELERY_BROKER_URL=os.environ.get('REDIS_URL', 'redis://localhost:6379/0'),
-        CELERY_RESULT_BACKEND=os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+        CELERY_RESULT_BACKEND=os.environ.get('REDIS_URL', 'redis://localhost:6379/0'),
+        
+        # Encryption
+        ENCRYPTION_KEY=os.environ.get('ENCRYPTION_KEY', Fernet.generate_key()),
     )
     
     # Initialize extensions
     db.init_app(app)
     jwt.init_app(app)
     mail.init_app(app)
-    CORS(app)
+    CORS(app, origins=os.environ.get('CORS_ORIGIN', 'http://localhost:3000'))
     
     # Configure Celery
     celery.conf.update(app.config)
@@ -59,6 +77,7 @@ def create_app():
     with app.app_context():
         db.create_all()
     
+    logger.info("SynthAI application initialized successfully")
     return app
 
 def make_celery(app):
