@@ -1,0 +1,143 @@
+name: Security Scan
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Weekly on Monday
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  codeql-security-scan:
+    name: CodeQL Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: python, javascript
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+  dependency-scan:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install and run Safety (Python)
+      run: |
+        pip install safety
+        cd backend
+        safety check --full-report
+
+    - name: Install and run npm audit (Node.js)
+      run: |
+        cd frontend
+        npm audit --audit-level moderate
+
+  container-scan:
+    name: Container Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Build Docker images
+      run: |
+        docker build -t synthai-backend ./backend
+        docker build -t synthai-frontend ./frontend
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'synthai-backend,synthai-frontend'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  secret-scan:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Run Gitleaks
+      uses: gitleaks/gitleaks-action@v2
+      with:
+        config-path: .gitleaks.toml
+
+  sast-scan:
+    name: SAST Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Run Bandit (Python SAST)
+      run: |
+        pip install bandit
+        cd backend
+        bandit -r src -f json -o bandit-results.json
+
+    - name: Run ESLint Security (JavaScript SAST)
+      run: |
+        cd frontend
+        npm install -g eslint-plugin-security
+        npx eslint . --config .eslintrc.security.js -f json -o eslint-security-results.json
+
+    - name: Upload SAST results
+      uses: actions/upload-artifact@v3
+      with:
+        name: sast-results
+        path: |
+          backend/bandit-results.json
+          frontend/eslint-security-results.json
+
+  security-notifications:
+    name: Security Notifications
+    runs-on: ubuntu-latest
+    needs: [codeql-security-scan, dependency-scan, container-scan, secret-scan, sast-scan]
+    if: always()
+    
+    steps:
+    - name: Send security report
+      if: needs.codeql-security-scan.result == 'failure' || needs.dependency-scan.result == 'failure' || needs.container-scan.result == 'failure' || needs.secret-scan.result == 'failure' || needs.sast-scan.result == 'failure'
+      uses: 8398a7/action-slack@v3
+      with:
+        status: failure
+        text: Security scan detected vulnerabilities. Please review the findings.
+        channel: '#security-alerts'
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SECURITY_WEBHOOK }}
