@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynthAI - AI-Powered Project Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #9b59b6;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8)), url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        .ai-pricing-form {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .security-badge {
+            background: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .ai-helper {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .ai-helper i {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--accent);
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .progress-bar-custom {
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+            border: none;
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background: #8e44ad;
+            color: white;
+        }
+        
+        .zar-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .social-marketing {
+            background: linear-gradient(135deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .marketing-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+        
+        .marketing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .marketing-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chatbot-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chatbot-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chatbot-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background: var(--light);
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            cursor: pointer;
+        }
+        
+        /* Shopping Cart */
+        .cart-icon {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .cart-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 300px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .cart-total {
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Modal Styles */
+        .modal-content {
+            border-radius: 10px;
+            border: none;
+        }
+        
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .form-floating {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot me-2"></i>SynthAI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">AI Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing-form">Get Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#marketing">Marketing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#security">Security</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="cart-icon me-3 position-relative">
+                        <i class="fas fa-shopping-cart text-light fs-5"></i>
+                        <span class="cart-count">0</span>
+                        <div class="cart-dropdown">
+                            <div class="cart-items">
+                                <!-- Cart items will be added here -->
+                            </div>
+                            <div class="cart-total">
+                                Total: R <span class="cart-total-amount">0</span>
+                            </div>
+                            <div class="p-2">
+                                <button class="btn btn-primary w-100">Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="display-4 fw-bold mb-4">AI-Powered Project Solutions</h1>
+                    <p class="lead mb-4">Our synthetic intelligence team analyzes your project requirements and provides instant pricing in ZAR with military-grade security.</p>
+                    <a href="#pricing-form" class="btn btn-light btn-lg">Get Your Project Priced</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="fw-bold mb-3">Our AI Team</h2>
+                    <p class="lead">Meet your dedicated AI helpers that work together to deliver your project</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Project Analyzer</h5>
+                            <p class="card-text">Analyzes project complexity, scope, and requirements to determine the optimal approach.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Tech Recommender</h5>
+                            <p class="card-text">Suggests the best technologies and frameworks based on your project needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Pricing Engine</h5>
+                            <p class="card-text">Calculates fair and accurate pricing in ZAR based on market rates and project complexity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="feature-card card">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Security Auditor</h5>
+                            <p class="card-text">Ensures military-grade security protocols are implemented throughout your project.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-card card">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-bullhorn fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Marketing Agent</h5>
+                            <p class="card-text">Promotes your project across all social media and professional platforms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Pricing Form -->
+    <section id="pricing-form" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="ai-pricing-form">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <h3 class="fw-bold">AI Project Pricing (ZAR)</h3>
+                                <p class="text-muted">Describe your project and our AI will instantly provide a price estimate in South African Rand</p>
+                            </div>
+                            <div class="col-auto">
+                                <span class="security-badge"><i class="fas fa-shield-alt me-1"></i> Military-Grade Security</span>
+                            </div>
+                        </div>
+                        
+                        <form id="projectForm">
+                            <div class="mb-4">
+                                <label for="projectDescription" class="form-label fw-bold">Project Description</label>
+                                <textarea class="form-control" id="projectDescription" rows="5" placeholder="Describe your project in detail..."></textarea>
+                                <div class="form-text">Be as detailed as possible for the most accurate pricing.</div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="projectType" class="form-label fw-bold">Project Type</label>
+                                    <select class="form-select" id="projectType">
+                                        <option value="">Select project type</option>
+                                        <option value="web">Web Application</option>
+                                        <option value="mobile">Mobile App</option>
+                                        <option value="ai">AI/ML Solution</option>
+                                        <option value="ecommerce">E-commerce Platform</option>
+                                        <option value="enterprise">Enterprise Software</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="complexity" class="form-label fw-bold">Estimated Complexity</label>
+                                    <select class="form-select" id="complexity">
+                                        <option value="">Select complexity level</option>
+                                        <option value="simple">Simple (Basic features)</option>
+                                        <option value="medium">Medium (Standard features)</option>
+                                        <option value="complex">Complex (Advanced features)</option>
+                                        <option value="very-complex">Very Complex (Cutting-edge tech)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="timeline" class="form-label fw-bold">Desired Timeline</label>
+                                    <select class="form-select" id="timeline">
+                                        <option value="">Select timeline</option>
+                                        <option value="flexible">Flexible (3+ months)</option>
+                                        <option value="standard">Standard (1-3 months)</option>
+                                        <option value="urgent">Urgent (2-4 weeks)</option>
+                                        <option value="asap">ASAP (1-2 weeks)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="teamSize" class="form-label fw-bold">Preferred Team Size</label>
+                                    <select class="form-select" id="teamSize">
+                                        <option value="">Select team size</option>
+                                        <option value="solo">Solo Developer</option>
+                                        <option value="small">Small Team (2-3)</option>
+                                        <option value="medium">Medium Team (4-6)</option>
+                                        <option value="large">Large Team (7+)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary btn-lg" id="calculatePrice">
+                                    <i class="fas fa-calculator me-2"></i>Calculate Price (ZAR)
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div id="priceResult" class="mt-4 p-4 bg-light rounded d-none">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4 class="fw-bold mb-1">Estimated Project Cost</h4>
+                                    <p class="mb-0" id="projectSummary">Based on your description and selections</p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <h2 class="zar-price" id="calculatedPrice">R 0</h2>
+                                    <button class="btn btn-accent mt-2" id="addToCart">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5>AI Analysis Breakdown</h5>
+                                <div class="ai-helper">
+                                    <i class="fas fa-brain"></i>
+                                    <div>
+                                        <h6 class="mb-1">Project Analyzer</h6>
+                                        <p class="mb-0 small" id="analyzerResult">Analyzing project requirements...</p>
+                                    </div>
+                                </div>
+                                <div class="ai-helper">
+                                    <i class="fas fa-cogs"></i>
+                                    <div>
+                                        <h6 class="mb-1">Tech Recommender</h6>
+                                        <p class="mb-0 small" id="techResult">Recommending technologies...</p>
+                                    </div>
+                                </div>
+                                <div class="ai-helper">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div>
+                                        <h6 class="mb-1">Pricing Engine</h6>
+                                        <p class="mb-0 small" id="pricingResult">Calculating fair pricing in ZAR...</p>
+                                    </div>
+                                </div>
+                                <div class="ai-helper">
+                                    <i class="fas fa-bullhorn"></i>
+                                    <div>
+                                        <h6 class="mb-1">Marketing Agent</h6>
+                                        <p class="mb-0 small" id="marketingResult">Preparing marketing strategy...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Marketing Section -->
+    <section id="marketing" class="social-marketing">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="fw-bold mb-3">AI-Powered Social Media Marketing</h2>
+                    <p class="lead">Our Marketing Agent promotes your project across all platforms</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="marketing-card text-center">
+                        <i class="fab fa-tiktok fa-3x mb-3"></i>
+                        <h5>TikTok Campaigns</h5>
+                        <p>Engaging short-form video content tailored for viral potential</p>
+                        <div class="marketing-price">R 5,000/month</div>
+                        <button class="btn btn-light add-marketing" data-platform="TikTok" data-price="5000">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="marketing-card text-center">
+                        <i class="fab fa-facebook fa-3x mb-3"></i>
+                        <h5>Facebook Marketing</h5>
+                        <p>Targeted ads and community building for maximum reach</p>
+                        <div class="marketing-price">R 4,500/month</div>
+                        <button class="btn btn-light add-marketing" data-platform="Facebook" data-price="4500">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="marketing-card text-center">
+                        <i class="fab fa-instagram fa-3x mb-3"></i>
+                        <h5>Instagram Strategy</h5>
+                        <p>Visual storytelling and influencer collaborations</p>
+                        <div class="marketing-price">R 4,200/month</div>
+                        <button class="btn btn-light add-marketing" data-platform="Instagram" data-price="4200">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="marketing-card text-center">
+                        <i class="fab fa-linkedin fa-3x mb-3"></i>
+                        <h5>LinkedIn Outreach</h5>
+                        <p>Professional network building and B2B marketing</p>
+                        <div class="marketing-price">R 6,000/month</div>
+                        <button class="btn btn-light add-marketing" data-platform="LinkedIn" data-price="6000">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="marketing-card text-center">
+                        <i class="fab fa-twitter fa-3x mb-3"></i>
+                        <h5>Twitter Engagement</h5>
+                        <p>Real-time conversations and trend participation</p>
+                        <div class="marketing-price">R 3,800/month</div>
+                        <button class="btn btn-light add-marketing" data-platform="Twitter" data-price="3800">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="marketing-card text-center">
+                        <i class="fas fa-envelope fa-3x mb-3"></i>
+                        <h5>Email Campaigns</h5>
+                        <p>Personalized communication and lead nurturing</p>
+                        <div class="marketing-price">R 2,500/month</div>
+                        <button class="btn btn-light add-marketing" data-platform="Email" data-price="2500">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="fw-bold mb-3">Military-Grade Security</h2>
+                    <p class="lead">Your data and projects are protected with the highest security standards</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <i class="fas fa-shield-alt fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5>End-to-End Encryption</h5>
+                            <p>All data transmitted between you and our AI systems is encrypted using AES-256 encryption.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <i class="fas fa-user-shield fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5>Zero-Knowledge Architecture</h5>
+                            <p>Our AI systems process your data without storing sensitive information, ensuring complete privacy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <i class="fas fa-fingerprint fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5>Multi-Factor Authentication</h5>
+                            <p>Secure access to your account with multiple authentication methods including biometrics.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <i class="fas fa-server fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5>Secure Infrastructure</h5>
+                            <p>Our servers are housed in Tier IV data centers with 24/7 monitoring and intrusion detection.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-robot me-2"></i>SynthAI</h5>
+                    <p>Revolutionizing project development with synthetic intelligence and military-grade security.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Home</a></li>
+                        <li><a href="#features" class="text-light">AI Team</a></li>
+                        <li><a href="#pricing-form" class="text-light">Pricing</a></li>
+                        <li><a href="#marketing" class="text-light">Marketing</a></li>
+                        <li><a href="#security" class="text-light">Security</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> info@synthai.co.za</li>
+                        <li><i class="fas fa-phone me-2"></i> 072 142 3215</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Cape Town, South Africa</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Follow Us</h5>
+                    <div class="d-flex">
+                        <a href="#" class="text-light me-3"><i class="fab fa-tiktok fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 SynthAI. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-light me-3">Privacy Policy</a>
+                    <a href="#" class="text-light">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to Your Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com" required>
+                            <label for="loginEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                            <label for="loginPassword">Password</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Your Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signupForm">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="signupName" placeholder="Full Name" required>
+                            <label for="signupName">Full Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="signupEmail" placeholder="name@example.com" required>
+                            <label for="signupEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
+                            <label for="signupPassword">Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm Password" required>
+                            <label for="signupConfirmPassword">Confirm Password</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-btn" id="chatbotToggle">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <span>Robyn - AI Assistant</span>
+                <button class="btn-close btn-close-white" id="closeChatbot"></button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hi! I'm Robyn, your AI assistant. How can I help you today?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Shopping Cart Functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        function updateCart() {
+            const cartCount = document.querySelector('.cart-count');
+            const cartItems = document.querySelector('.cart-items');
+            const cartTotal = document.querySelector('.cart-total-amount');
+            
+            cartCount.textContent = cart.length;
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <div>${item.name}</div>
+                        <div>R ${item.price.toLocaleString('en-ZA')}</div>
+                        <button class="btn btn-sm btn-danger remove-from-cart" data-index="${index}">×</button>
+                    </div>
+                `;
+            });
+            
+            cartTotal.textContent = total.toLocaleString('en-ZA');
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+            
+            // Show confirmation
+            alert(`Added ${name} to cart for R ${price.toLocaleString('en-ZA')}`);
+        }
+        
+        // Event listeners for cart
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-from-cart')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                cart.splice(index, 1);
+                updateCart();
+            }
+            
+            if (e.target.classList.contains('cart-icon') || e.target.closest('.cart-icon')) {
+                document.querySelector('.cart-dropdown').style.display = 
+                    document.querySelector('.cart-dropdown').style.display === 'block' ? 'none' : 'block';
+            }
+        });
+        
+        // Marketing platform buttons
+        document.querySelectorAll('.add-marketing').forEach(button => {
+            button.addEventListener('click', function() {
+                const platform = this.getAttribute('data-platform');
+                const price = parseInt(this.getAttribute('data-price'));
+                addToCart(`${platform} Marketing Package`, price);
+            });
+        });
+        
+        // Project pricing calculation
+        document.getElementById('calculatePrice').addEventListener('click', function() {
+            const description = document.getElementById('projectDescription').value;
+            const projectType = document.getElementById('projectType').value;
+            const complexity = document.getElementById('complexity').value;
+            const timeline = document.getElementById('timeline').value;
+            const teamSize = document.getElementById('teamSize').value;
+            
+            if (!description || !projectType || !complexity || !timeline || !teamSize) {
+                alert('Please fill in all fields to get an accurate price estimate.');
+                return;
+            }
+            
+            const calculateBtn = document.getElementById('calculatePrice');
+            calculateBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...';
+            calculateBtn.disabled = true;
+            
+            setTimeout(function() {
+                let basePrice = 0;
+                
+                const typePrices = {
+                    'web': 85000,
+                    'mobile': 135000,
+                    'ai': 255000,
+                    'ecommerce': 170000,
+                    'enterprise': 340000,
+                    'other': 119000
+                };
+                
+                const complexityMultipliers = {
+                    'simple': 0.7,
+                    'medium': 1.0,
+                    'complex': 1.5,
+                    'very-complex': 2.2
+                };
+                
+                const timelineMultipliers = {
+                    'flexible': 0.9,
+                    'standard': 1.0,
+                    'urgent': 1.3,
+                    'asap': 1.7
+                };
+                
+                const teamSizeMultipliers = {
+                    'solo': 0.8,
+                    'small': 1.0,
+                    'medium': 1.3,
+                    'large': 1.8
+                };
+                
+                basePrice = typePrices[projectType] * complexityMultipliers[complexity] * 
+                           timelineMultipliers[timeline] * teamSizeMultipliers[teamSize];
+                
+                const descLength = description.length;
+                if (descLength > 1000) basePrice *= 1.2;
+                else if (descLength > 500) basePrice *= 1.1;
+                
+                basePrice = Math.round(basePrice / 100) * 100;
+                
+                document.getElementById('calculatedPrice').textContent = 'R ' + basePrice.toLocaleString('en-ZA');
+                
+                const projectTypes = {
+                    'web': 'web application',
+                    'mobile': 'mobile application',
+                    'ai': 'AI/ML solution',
+                    'ecommerce': 'e-commerce platform',
+                    'enterprise': 'enterprise software',
+                    'other': 'custom project'
+                };
+                
+                const complexityText = {
+                    'simple': 'relatively simple',
+                    'medium': 'moderately complex',
+                    'complex': 'highly complex',
+                    'very-complex': 'extremely complex'
+                };
+                
+                document.getElementById('projectSummary').textContent = 
+                    `A ${complexityText[complexity]} ${projectTypes[projectType]} with ${teamSize} team and ${timeline} timeline.`;
+                
+                document.getElementById('analyzerResult').textContent = 
+                    `Identified as a ${complexityText[complexity]} project requiring specialized attention.`;
+                
+                const techRecommendations = {
+                    'web': 'React.js, Node.js, MongoDB',
+                    'mobile': 'React Native, Firebase, Redux',
+                    'ai': 'Python, TensorFlow, PyTorch',
+                    'ecommerce': 'Shopify API, Stripe, React',
+                    'enterprise': 'Java Spring Boot, MySQL, Docker',
+                    'other': 'Custom technology stack based on requirements'
+                };
+                
+                document.getElementById('techResult').textContent = 
+                    `Recommended technologies: ${techRecommendations[projectType]}.`;
+                
+                document.getElementById('pricingResult').textContent = 
+                    `Calculated fair market price in ZAR based on ${projectTypes[projectType]} complexity and timeline.`;
+                
+                const marketingPlatforms = {
+                    'web': 'Facebook, LinkedIn, and targeted Google Ads',
+                    'mobile': 'TikTok, Instagram, and mobile app stores',
+                    'ai': 'LinkedIn, tech blogs, and industry publications',
+                    'ecommerce': 'Instagram, Facebook Shops, and influencer marketing',
+                    'enterprise': 'LinkedIn, industry events, and targeted email campaigns',
+                    'other': 'Multi-platform approach based on target audience'
+                };
+                
+                document.getElementById('marketingResult').textContent = 
+                    `Marketing strategy: ${marketingPlatforms[projectType]}.`;
+                
+                document.getElementById('priceResult').classList.remove('d-none');
+                
+                // Set up add to cart button for the project
+                document.getElementById('addToCart').onclick = function() {
+                    addToCart(
+                        `${projectTypes[projectType]} Development`, 
+                        basePrice
+                    );
+                };
+                
+                calculateBtn.innerHTML = '<i class="fas fa-calculator me-2"></i>Calculate Price (ZAR)';
+                calculateBtn.disabled = false;
+            }, 2000);
+        });
+        
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const closeChatbot = document.getElementById('closeChatbot');
+        const sendMessage = document.getElementById('sendMessage');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        
+        chatbotToggle.addEventListener('click', function() {
+            chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        closeChatbot.addEventListener('click', function() {
+            chatbotWindow.style.display = 'none';
+        });
+        
+        function addMessage(message, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = message;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+        
+        function getBotResponse(userMessage) {
+            const responses = {
+                'hello': 'Hello! How can I assist you with your project today?',
+                'hi': 'Hi there! I\'m Robyn, your AI assistant. What can I help you with?',
+                'pricing': 'Our AI analyzes your project requirements to provide accurate pricing. Fill out the form above to get a quote!',
+                'services': 'We offer web development, mobile apps, AI solutions, e-commerce platforms, and enterprise software.',
+                'marketing': 'We provide social media marketing on TikTok, Facebook, Instagram, LinkedIn, Twitter, and email campaigns.',
+                'security': 'All projects include military-grade security with end-to-end encryption and zero-knowledge architecture.',
+                'contact': 'You can reach us at info@synthai.co.za or call 072 142 3215. We\'re based in Cape Town, South Africa.'
+            };
+            
+            userMessage = userMessage.toLowerCase();
+            
+            for (const [keyword, response] of Object.entries(responses)) {
+                if (userMessage.includes(keyword)) {
+                    return response;
+                }
+            }
+            
+            return "I'm not sure I understand. Can you please rephrase your question? You can ask me about pricing, services, marketing, or security.";
+        }
+        
+        sendMessage.addEventListener('click', function() {
+            const message = chatbotInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                chatbotInput.value = '';
+                
+                setTimeout(function() {
+                    const response = getBotResponse(message);
+                    addMessage(response, false);
+                }, 1000);
+            }
+        });
+        
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage.click();
+            }
+        });
+        
+        // Form functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simple validation
+            if (email && password) {
+                alert('Login successful!');
+                document.getElementById('loginModal').querySelector('.btn-close').click();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+        
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+            
+            if (name && email && password) {
+                // Store user data (in a real app, this would be sent to a server)
+                const userData = {
+                    name: name,
+                    email: email,
+                    password: password // In a real app, this would be hashed
+                };
+                
+                localStorage.setItem('user', JSON.stringify(userData));
+                alert('Account created successfully!');
+                document.getElementById('signupModal').querySelector('.btn-close').click();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+        
+        // Initialize cart on page load
+        updateCart();
+    </script>
+</body>
+</html>
