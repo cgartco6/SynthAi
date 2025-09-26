@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: synthai-ingress
+  namespace: synthai
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+spec:
+  tls:
+  - hosts:
+    - synthai.co.za
+    - www.synthai.co.za
+    secretName: synthai-tls
+  rules:
+  - host: synthai.co.za
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: synthai-frontend
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: synthai-backend
+            port:
+              number: 8000
+  - host: www.synthai.co.za
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: synthai-frontend
+            port:
+              number: 80
