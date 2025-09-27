@@ -67,3 +67,74 @@
   font-size: 0.8rem;
   font-weight: 600;
 }
+/* Add to existing CSS */
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 24px;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  z-index: 1000;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  background: linear-gradient(135deg, #128C7E, #25D366);
+}
+
+/* WhatsApp section styles */
+.whatsapp-section {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  padding: 60px 0;
+}
+
+.whatsapp-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-card:hover {
+  transform: translateY(-5px);
+}
+
+.whatsapp-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.whatsapp-btn {
+  background: white;
+  color: #25D366;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  background: #f8f9fa;
+  color: #128C7E;
+  transform: translateY(-2px);
+  }
