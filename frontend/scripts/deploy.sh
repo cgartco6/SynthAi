@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Add WhatsApp environment variables
+echo "🔧 Configuring WhatsApp environment..."
+cat > .env.production << EOF
+REACT_APP_API_URL=https://api.synthai.co.za
+REACT_APP_STRIPE_PUBLISHABLE_KEY=${REACT_APP_STRIPE_PUBLISHABLE_KEY}
+REACT_APP_WHATSAPP_NUMBER=+27721423215
+REACT_APP_WHATSAPP_MESSAGE=Hi%20SynthAI%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20services.
+REACT_APP_VERSION=${VERSION}
+REACT_APP_ENVIRONMENT=${ENVIRONMENT}
+EOF
+
+# Rest of the deployment script remains the same...
 # SynthAI Frontend Deployment Script
 # Usage: ./scripts/deploy.sh [environment] [version]
 
